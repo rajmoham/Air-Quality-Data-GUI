@@ -1,5 +1,6 @@
 import unittest
 from csv_file_data import CSVFileData
+from helper import *
 
 BRISTOL_FILE_LOC = "./data/air_quality_data.csv"
 
@@ -25,3 +26,13 @@ class TestCSVFileDataClass(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             CSVFileData("./data/does_not_exist.csv")
 
+class TestAverageAQIFunction(unittest.TestCase):
+    def test_average_aqi_no_empty_inputs(self):
+        """Test function with no empty inputs"""
+        expected_result = 9.5
+
+        input_reading1 = [i for i in range(20)]
+        input_reading2 = [2*i for i in range(20)]
+        actual_result = calculate_average_aqi(input_reading1, input_reading2)
+        self.assertEqual(actual_result, expected_result,
+                        f"Average for test data should be {expected_result}")
