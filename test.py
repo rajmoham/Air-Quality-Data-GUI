@@ -74,3 +74,25 @@ class TestAverageFunction(unittest.TestCase):
         actual_result = average(input_data)
         self.assertEqual(actual_result, expected_result,
                 f"Average for {input_data} should be {expected_result}")
+
+class TestCalculateDifference(unittest.TestCase):
+    def test_difference_wrong_order(self):
+        expected_result = 5.0
+
+        actual_result = calculate_difference(15.0, 10.0)
+        self.assertEqual(actual_result, expected_result,
+                         "Difference for wrong order should be 5.0")
+
+    def test_difference_correct_order(self):
+        expected_result = 5.0
+
+        actual_result = calculate_difference(10.0, 15.0)
+        self.assertEqual(actual_result, expected_result,
+                         "Difference for correct order should be 5.0")
+
+    def test_difference_same_number(self):
+        expected_result = 0.0
+
+        actual_result = calculate_difference(15.0, 15.0)
+        self.assertEqual(actual_result, expected_result,
+                         "Difference for same numbers should be 0.0")
