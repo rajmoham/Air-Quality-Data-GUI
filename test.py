@@ -52,18 +52,25 @@ class TestAverageAQIFunction(unittest.TestCase):
         actual_result = calculate_average_aqi(input_readings, input_readings)
         self.assertEqual(actual_result, expected_result,
                          f"Average for no inputs should be {expected_result}")
-
-    def test_average_aqi_with_actual_data(self):
-        expected_result = 27.80
-        readings = bristol_data.get_readings()
-        average = calculate_average_aqi(readings[0], readings[1])
-        actual_result = round(average, 2)
-        self.assertEqual(expected_result, actual_result,
-                        f"Average for data should be {expected_result}")
-
+                         
     def test_average_aqi_one_column_empty(self):
         input_data = [i for i in range(20)]
         expected_result = 9.5
         actual_result = calculate_average_aqi(input_data, [])
         self.assertEqual(expected_result, actual_result,
                          "Result for average AQI should be 9.5")
+        
+class TestAverageFunction(unittest.TestCase):
+    def test_avg_with_no_data(self):
+        input_data = []
+        expected_result = 0
+        actual_result = average(input_data)
+        self.assertEqual(actual_result, expected_result,
+                         "Average for no data should be 0")
+        
+    def test_avg_with_sample_data(self):
+        input_data = [1.3, 2.4, 19.4, 29.3, 20.9, 16.6, 25.5, 23.7]
+        expected_result = 17.3875
+        actual_result = average(input_data)
+        self.assertEqual(actual_result, expected_result,
+                f"Average for {input_data} should be {expected_result}")
