@@ -15,15 +15,11 @@ def calculate_average_aqi(loc1_readings, loc2_readings):
         float: The average AQI difference to three decimal places.
     """
 
-    loc1_filtered = []
-    for row in loc1_readings:
-        if not isinstance(row, str):
-            loc1_filtered.append(row)
+    loc1_filtered = list(filter(lambda row: 
+                    not isinstance(row, str), loc1_readings))
 
-    loc2_filtered = []
-    for row in loc2_readings:
-        if not isinstance(row, str):
-            loc2_filtered.append(row)
+    loc2_filtered = list(filter(lambda row: 
+                    not isinstance(row, str), loc2_readings))
 
     loc1_mean = average(loc1_filtered)
     loc2_mean = average(loc2_filtered)
