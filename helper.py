@@ -1,3 +1,32 @@
+def reorder_arguments(function):
+    """Decorator to reorder arguments with smallest first.
+
+    Args:
+        function (callable): The function to be decorated.
+
+    Returns:
+        callable: Decorated function with reordered arguments.
+    """
+    def wrapper(arg1, arg2):
+        func = lambda arg1, arg2 : function(arg1, arg2) if (arg1 < arg2) \
+              else function(arg2, arg1)
+        return func(arg1, arg2)
+
+    return wrapper
+
+@reorder_arguments
+def calculate_difference(data1, data2):
+    """Calculate the difference between two data points.
+
+    Args:
+        data1: The first data point.
+        data2: The second data point.
+
+    Returns:
+        float: The positive difference between the two data points.
+    """
+    return data2 - data1
+
 def average(nums):
     """Calculates the average of a list of numbers"""
     if (len(nums) == 0):
@@ -24,4 +53,4 @@ def calculate_average_aqi(loc1_readings, loc2_readings):
     loc1_mean = average(loc1_filtered)
     loc2_mean = average(loc2_filtered)
 
-    return max(loc1_mean, loc2_mean) - min(loc1_mean, loc2_mean)
+    return calculate_difference(loc1_mean, loc2_mean)
