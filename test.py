@@ -96,3 +96,34 @@ class TestCalculateDifference(unittest.TestCase):
         actual_result = calculate_difference(15.0, 15.0)
         self.assertEqual(actual_result, expected_result,
                          "Difference for same numbers should be 0.0")
+
+class TestStandardDeviation(unittest.TestCase):
+    def test_sd_no_deviated_dataset(self):
+        input_data = [1 for i in range(5)]
+        expected_result = 0
+        actual_result = population_sd(input_data)
+        self.assertEqual(actual_result, expected_result,
+                         "Result should be 0 for no deviation")
+
+    def test_sd_no_input_data(self):
+        input_data = []
+        expected_result = 0
+        actual_result = population_sd(input_data)
+        self.assertEqual(actual_result, expected_result,
+                         "Result should be 0 for no inputs")
+
+    def test_sd_dataset_length_one(self):
+        input_data = [1]
+        expected_result = 0
+        actual_result = population_sd(input_data)
+        self.assertEqual(actual_result, expected_result,
+                         "Result should be 0 for a list of length 1")
+
+    def test_sd_with_sample_data(self):
+        input_data = [18.1, 12.7, 9.9, 18.3, 13, 16.2, 17.6, 16.7,
+                        13.9, 17.5, 25.4, 15.9]
+        expected_result = 3.698
+        actual_result = round(population_sd(input_data),3)
+        self.assertEqual(actual_result, expected_result,
+                         f"Result should be {expected_result} for the data: \
+                            {input_data}")

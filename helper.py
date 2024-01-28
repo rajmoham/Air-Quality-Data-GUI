@@ -54,3 +54,15 @@ def calculate_average_aqi(loc1_readings, loc2_readings):
     loc2_mean = average(loc2_filtered)
 
     return calculate_difference(loc1_mean, loc2_mean)
+
+def population_sd(data):
+    """Calculates the population standard deviation for a set of data"""
+    
+    avg = sum(data) / len(data)
+    data_sqr = map(lambda num: num**2, data)
+
+    # Following is the formula for calculating SD
+    s_xx = sum(data_sqr) - (avg**2)*len(data)
+    variance = s_xx / len(data)
+    sd = variance**(1/2)
+    return sd
