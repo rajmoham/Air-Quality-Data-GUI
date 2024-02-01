@@ -1,8 +1,10 @@
 import unittest
 from csv_file_data import CSVFileData
+from air_data import AirData
 from helper import *
 
 BRISTOL_FILE_LOC = "./data/air_quality_data.csv"
+bristol_data = AirData(BRISTOL_FILE_LOC)
 
 class TestCSVFileDataClass(unittest.TestCase):
     """Test cases for CSVFileData class"""

@@ -13,15 +13,14 @@ class AirData(CSVFileData):
         extracts air quality data.
         """
         super().__init__(file)
-        self._extract_data()
+        self._extract_information()
 
-    def _extract_data(self):
+    def _extract_information(self):
         """
         Extracts and parses various data from the inherited CSV file data.
         """
         self._extract_title()
         self._extract_location_names()
-        self._extract_data()
         self._extract_readings()
 
     def _extract_title(self):
@@ -55,8 +54,10 @@ class AirData(CSVFileData):
             reading1.append(self.parse_data(row[2]))
             reading2.append(self.parse_data(row[3]))
 
-        return [reading1, reading2]
-            
+        self._readings = [reading1, reading2]
+
+    def get_readings(self):
+        return self._readings
 
     def parse_data(data_field):
         """Converts the given data field into float if it is not empty"""
