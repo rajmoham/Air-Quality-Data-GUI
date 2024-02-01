@@ -13,17 +13,18 @@ class AirData(CSVFileData):
         extracts air quality data.
         """
         super().__init__(file)
-        self.extract_data()
+        self._extract_data()
 
-    def extract_data(self):
+    def _extract_data(self):
         """
         Extracts and parses various data from the inherited CSV file data.
         """
-        self.extract_title()
-        self.extract_location_names()
-        
+        self._extract_title()
+        self._extract_location_names()
+        self._extract_data()
+        self._extract_readings()
 
-    def extract_title(self):
+    def _extract_title(self):
         """Extracts the title from the file"""
         self._title = self._file_data[0][0]
 
@@ -31,11 +32,17 @@ class AirData(CSVFileData):
         """Returns the title of the air quality data."""
         return self._title
     
-    def extract_location_names(self):
+    def _extract_location_names(self):
         """Extracts the two location names from the file"""
         self._location_names = self._file_data[6][2:4]
     
     def get_location_names(self):
+        """Returns the two location names of the air quality data"""
         return self._location_names
     
-    
+    def get_data(self):
+        """
+        Overrides the function from the parent class
+        Extracts and Returns the data fr the air quality dat
+        """
+        return self._file_data[9:]
