@@ -81,8 +81,8 @@ class TestAverageFunction(unittest.TestCase):
                 f"Average for {input_data} should be {expected_result}")
 
 class TestCalculateDifference(unittest.TestCase):
-    """Test function with parameters passed in wrong order"""
     def test_difference_wrong_order(self):
+        """Test function with parameters passed in wrong order"""
         expected_result = 5.0
 
         actual_result = calculate_difference(15.0, 10.0)
@@ -106,8 +106,8 @@ class TestCalculateDifference(unittest.TestCase):
                          "Difference for same numbers should be 0.0")
 
 class TestStandardDeviation(unittest.TestCase):
-    """Test SD function with no all items in list being the same"""
     def test_sd_no_deviated_dataset(self):
+        """Test SD function with no all items in list being the same"""
         input_data = [1 for i in range(5)]
         expected_result = 0
         actual_result = population_sd(input_data)
