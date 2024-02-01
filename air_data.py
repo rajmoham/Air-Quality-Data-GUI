@@ -46,3 +46,21 @@ class AirData(CSVFileData):
         Extracts and Returns the data fr the air quality dat
         """
         return self._file_data[9:]
+    
+    def _extract_readings(self):
+        """Extracts and parses the raw data readings from the file"""
+        reading1 = []
+        reading2 = []
+        for row in self.get_data():
+            reading1.append(self.parse_data(row[2]))
+            reading2.append(self.parse_data(row[3]))
+
+        return [reading1, reading2]
+            
+
+    def parse_data(data_field):
+        """Converts the given data field into float if it is not empty"""
+        if data_field.isspace():
+            return data_field
+        
+        return float(data_field)
