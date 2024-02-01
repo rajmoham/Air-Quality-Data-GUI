@@ -59,7 +59,7 @@ class AirData(CSVFileData):
     def get_readings(self):
         return self._readings
 
-    def parse_data(data_field):
+    def parse_data(self,data_field):
         """Converts the given data field into float if it is not empty"""
         if data_field.isspace():
             return data_field
