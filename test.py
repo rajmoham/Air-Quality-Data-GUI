@@ -38,6 +38,7 @@ class TestAverageAQIFunction(unittest.TestCase):
                         f"Average for test data should be {expected_result}")
         
     def test_average_aqi_all_empty_inputs(self):
+        """Test function where inputs are contentless strings"""
         expected_result = 0
 
         input_readings = [['    ', '    '] for _ in range(20)]
@@ -47,6 +48,7 @@ class TestAverageAQIFunction(unittest.TestCase):
             f"Average for empty inputs should be {expected_result}")
         
     def test_average_aqi_no_inputs(self):
+        """Test function with an empty list"""
         expected_result = 0
         input_readings = []
         actual_result = calculate_average_aqi(input_readings, input_readings)
@@ -54,6 +56,7 @@ class TestAverageAQIFunction(unittest.TestCase):
                          f"Average for no inputs should be {expected_result}")
                          
     def test_average_aqi_one_column_empty(self):
+        """Test function with only one column of 2D list filled"""
         input_data = [i for i in range(20)]
         expected_result = 9.5
         actual_result = calculate_average_aqi(input_data, [])
@@ -62,6 +65,7 @@ class TestAverageAQIFunction(unittest.TestCase):
         
 class TestAverageFunction(unittest.TestCase):
     def test_avg_with_no_data(self):
+        """Test average function with no data"""
         input_data = []
         expected_result = 0
         actual_result = average(input_data)
@@ -69,6 +73,7 @@ class TestAverageFunction(unittest.TestCase):
                          "Average for no data should be 0")
         
     def test_avg_with_sample_data(self):
+        """Test average function with set of data"""
         input_data = [1.3, 2.4, 19.4, 29.3, 20.9, 16.6, 25.5, 23.7]
         expected_result = 17.3875
         actual_result = average(input_data)
@@ -76,6 +81,7 @@ class TestAverageFunction(unittest.TestCase):
                 f"Average for {input_data} should be {expected_result}")
 
 class TestCalculateDifference(unittest.TestCase):
+    """Test function with parameters passed in wrong order"""
     def test_difference_wrong_order(self):
         expected_result = 5.0
 
@@ -84,6 +90,7 @@ class TestCalculateDifference(unittest.TestCase):
                          "Difference for wrong order should be 5.0")
 
     def test_difference_correct_order(self):
+        """Test function with parameters passed in correct order"""
         expected_result = 5.0
 
         actual_result = calculate_difference(10.0, 15.0)
@@ -91,6 +98,7 @@ class TestCalculateDifference(unittest.TestCase):
                          "Difference for correct order should be 5.0")
 
     def test_difference_same_number(self):
+        """Test function with the same value"""
         expected_result = 0.0
 
         actual_result = calculate_difference(15.0, 15.0)
@@ -98,6 +106,7 @@ class TestCalculateDifference(unittest.TestCase):
                          "Difference for same numbers should be 0.0")
 
 class TestStandardDeviation(unittest.TestCase):
+    """Test SD function with no all items in list being the same"""
     def test_sd_no_deviated_dataset(self):
         input_data = [1 for i in range(5)]
         expected_result = 0
@@ -106,6 +115,7 @@ class TestStandardDeviation(unittest.TestCase):
                          "Result should be 0 for no deviation")
 
     def test_sd_no_input_data(self):
+        """Test SD function with empty list"""
         input_data = []
         expected_result = 0
         actual_result = population_sd(input_data)
@@ -113,6 +123,7 @@ class TestStandardDeviation(unittest.TestCase):
                          "Result should be 0 for no inputs")
 
     def test_sd_dataset_length_one(self):
+        """Test SD function with 1 item in the list"""
         input_data = [1]
         expected_result = 0
         actual_result = population_sd(input_data)
@@ -120,6 +131,7 @@ class TestStandardDeviation(unittest.TestCase):
                          "Result should be 0 for a list of length 1")
 
     def test_sd_with_sample_data(self):
+        """Test SD function with a sample of the data"""
         input_data = [18.1, 12.7, 9.9, 18.3, 13, 16.2, 17.6, 16.7,
                         13.9, 17.5, 25.4, 15.9]
         expected_result = 3.698
