@@ -10,10 +10,10 @@ class CSVFileData:
         get_data(): returns the file data
     """
 
-    _file_data = []
-
     def __init__(self, file):
         """Reads file path, parses data and stores in object"""
+        self._file_data = []
+        
         if self.file_type(file) != "csv":
             raise Exception("File type is not csv")
         

@@ -1,8 +1,7 @@
 import unittest
 from csv_file_data import CSVFileData
+from air_data import AirData
 from helper import *
-
-BRISTOL_FILE_LOC = "./data/air_quality_data.csv"
 
 class TestCSVFileDataClass(unittest.TestCase):
     """Test cases for CSVFileData class"""
@@ -81,8 +80,8 @@ class TestAverageFunction(unittest.TestCase):
                 f"Average for {input_data} should be {expected_result}")
 
 class TestCalculateDifference(unittest.TestCase):
-    """Test function with parameters passed in wrong order"""
     def test_difference_wrong_order(self):
+        """Test function with parameters passed in wrong order"""
         expected_result = 5.0
 
         actual_result = calculate_difference(15.0, 10.0)
@@ -106,8 +105,8 @@ class TestCalculateDifference(unittest.TestCase):
                          "Difference for same numbers should be 0.0")
 
 class TestStandardDeviation(unittest.TestCase):
-    """Test SD function with no all items in list being the same"""
     def test_sd_no_deviated_dataset(self):
+        """Test SD function with no all items in list being the same"""
         input_data = [1 for i in range(5)]
         expected_result = 0
         actual_result = population_sd(input_data)
@@ -139,3 +138,33 @@ class TestStandardDeviation(unittest.TestCase):
         self.assertEqual(actual_result, expected_result,
                          f"Result should be {expected_result} for the data: \
                             {input_data}")
+          
+class TestAirDataClass(unittest.TestCase):
+    BRISTOL_FILE_LOC = "./data/air_quality_data.csv"
+    bristol_data = AirData(BRISTOL_FILE_LOC)
+
+    def test_interitance(self):
+        """Tests for inheritance between CSVFileData and AirData"""
+        self.assertIsInstance(self.bristol_data, CSVFileData,
+                              "Inheritance is not implemented")
+
+    def test_air_data_title(self):
+        """"""
+        expected_result = 'Mobile Pie NOx data'
+
+        actual_result = self.bristol_data.get_title()
+        self.assertEqual(actual_result, expected_result,
+                         "Title not extracted correctly")
+
+    def test_air_data_locations(self):
+        expected_result = ['NO2 Brislington', 'NO2 Rupert Street']
+
+        actual_result = self.bristol_data.get_location_names()
+        self.assertEqual(actual_result, expected_result,
+                         "Locations not extracted correctly")
+
+    def test_overriden_function_from_inheritance(self):
+        parent_class_function = CSVFileData.get_data
+        child_class_function = AirData.get_data
+        self.assertIsNot(parent_class_function, child_class_function,
+                         "Overriding functions not done correctly")
