@@ -170,3 +170,36 @@ class TestAirDataClass(unittest.TestCase):
         child_class_function = AirData.get_data
         self.assertIsNot(parent_class_function, child_class_function,
                          "Overriding functions not done correctly")
+
+class TestSeparateDataFunction(unittest.TestCase):
+    def test_function_with_sample_data(self):
+        input_data = [['0', '0', 1.0, 2.0],
+                      ['0', '1', 3.0, 4.0],
+                      ['0', '2', 5.0, 6.0],
+                      ['1', '0', 7.0, 8.0],
+                      ['1', '1', 9.0, 10.0],
+                      ['1', '2', 11.0, 12.0],
+                      ]
+        expected_results = ([['0', '0', 1.0],
+                            ['0', '1', 3.0],
+                            ['0', '2', 5.0],
+                            ['1', '0', 7.0],
+                            ['1', '1', 9.0],
+                            ['1', '2', 11.0]],
+                            [['0', '0', 2.0],
+                            ['0', '1', 4.0],
+                            ['0', '2', 6.0],
+                            ['1', '0', 8.0],
+                            ['1', '1', 10.0],
+                            ['1', '2', 12.0]])
+        actual_results = separate_data(input_data)
+        self.assertEqual(expected_results, actual_results)
+
+    def test_function_with_invalid_data(self):
+        input_data = [['0', '0', '   ', '   '],
+                      ['0', '1', '   ', '   '],
+                      ['0', '2', '   ', '   '],
+                      ]
+        expected_results = ([],[])
+        actual_results = separate_data(input_data)
+        self.assertEqual(expected_results, actual_results)
