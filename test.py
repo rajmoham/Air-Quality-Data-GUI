@@ -170,3 +170,66 @@ class TestAirDataClass(unittest.TestCase):
         child_class_function = AirData.get_data
         self.assertIsNot(parent_class_function, child_class_function,
                          "Overriding functions not done correctly")
+
+class TestSeparateDataFunction(unittest.TestCase):
+    def test_function_with_sample_data(self):
+        """Tests function with a set of sample data"""
+        input_data = [['0', '0', 1.0, 2.0],
+                      ['0', '1', 3.0, 4.0],
+                      ['0', '2', 5.0, 6.0],
+                      ['1', '0', 7.0, 8.0],
+                      ['1', '1', 9.0, 10.0],
+                      ['1', '2', 11.0, 12.0],
+                      ]
+        expected_results = ([['0', '0', 1.0],
+                            ['0', '1', 3.0],
+                            ['0', '2', 5.0],
+                            ['1', '0', 7.0],
+                            ['1', '1', 9.0],
+                            ['1', '2', 11.0]],
+                            [['0', '0', 2.0],
+                            ['0', '1', 4.0],
+                            ['0', '2', 6.0],
+                            ['1', '0', 8.0],
+                            ['1', '1', 10.0],
+                            ['1', '2', 12.0]])
+        actual_results = separate_data(input_data)
+        self.assertEqual(expected_results, actual_results)
+
+    def test_function_with_invalid_data(self):
+        """Tests the function where no readings are valid"""
+        input_data = [['0', '0', '   ', '   '],
+                      ['0', '1', '   ', '   '],
+                      ['0', '2', '   ', '   '],
+                      ]
+        expected_results = ([],[])
+        actual_results = separate_data(input_data)
+        self.assertEqual(expected_results, actual_results)
+
+class TestThreePointWindowFunction(unittest.TestCase):
+    def test_data_with_sample_data(self):
+        input_data = [[3*x + 2*y for x in range(3)] for y in range(10)]
+        actual_results = get_three_point_window_data(input_data, 3)
+        expected_results = [12, 14, 16]
+        self.assertEqual(actual_results, expected_results)
+
+class TestHighestThreePointSDFunction(unittest.TestCase):
+    BRISTOL_FILE_LOC = "./data/air_quality_data.csv"
+    bristol_data = AirData(BRISTOL_FILE_LOC)
+
+    def test_function_with_sample_data(self):
+        input_data = [['0', '0', 1.2],
+                      ['0', '1', 3.4],
+                      ['1', '0', 34.5],
+                      ['1', '1', 2.3]]
+        actual_results = highest_three_point_sd(input_data)
+        expected_results = [['0', '0', 1.2],
+                            ['0', '1', 3.4],
+                            ['1', '0', 34.5]]
+        self.assertEqual(actual_results, expected_results)
+        
+    def test_function_with_not_enough_data(self):
+        input_data = []
+        actual_results = highest_three_point_sd(input_data)
+        expected_results = None
+        self.assertEqual(actual_results, expected_results)

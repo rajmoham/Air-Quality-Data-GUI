@@ -69,3 +69,43 @@ def population_sd(data):
     variance = s_xx / len(data)
     sd = variance**(1/2)
     return sd
+
+def separate_data(data):
+    """
+    Separates the readings but keeps timeline data for each reading
+    while also filtering invalid data
+    """
+    data1 = []
+    data2 = []
+    for _, row in enumerate(data):
+        if isinstance(row[2], float):
+            data1.append(row[0:3])
+        if isinstance(row[3], float):
+            data2.append([row[i] for i in (0, 1, 3)])
+
+    return data1, data2
+
+def get_three_point_window_data(data, start_row):
+    """Returns only the readings in a three-point window"""
+    readings = [data[start_row][2], 
+                data[start_row + 1][2],
+                data[start_row + 2][2]]
+
+    return readings
+
+def highest_three_point_sd(data):
+    """Returns the three rows with the highest standard deviation"""
+    highest_sd = 0
+    row = None
+
+    for start_row in range(len(data) - 2):
+        window_data = get_three_point_window_data(data, start_row)
+        sd = population_sd(window_data)
+        if sd > highest_sd:
+            highest_sd = sd
+            row = start_row
+    
+    if row is not None:
+        return data[row:row+3]
+    
+    return None
