@@ -92,3 +92,20 @@ def get_three_point_window_data(data, start_row):
                 data[start_row + 2][2]]
 
     return readings
+
+def highest_three_point_sd(data):
+    """Returns the three rows with the highest standard deviation"""
+    highest_sd = 0
+    row = None
+
+    for start_row in range(len(data) - 2):
+        window_data = get_three_point_window_data(data, start_row)
+        sd = population_sd(window_data)
+        if sd > highest_sd:
+            highest_sd = sd
+            row = start_row
+    
+    if row is not None:
+        return data[row:row+3]
+    
+    return None
