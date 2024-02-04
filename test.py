@@ -149,7 +149,7 @@ class TestAirDataClass(unittest.TestCase):
                               "Inheritance is not implemented")
 
     def test_air_data_title(self):
-        """"""
+        """Tests for correct title output from data file"""
         expected_result = 'Mobile Pie NOx data'
 
         actual_result = self.bristol_data.get_title()
@@ -157,6 +157,7 @@ class TestAirDataClass(unittest.TestCase):
                          "Title not extracted correctly")
 
     def test_air_data_locations(self):
+        """Tests for correct locations output from data file"""
         expected_result = ['NO2 Brislington', 'NO2 Rupert Street']
 
         actual_result = self.bristol_data.get_location_names()
@@ -164,6 +165,7 @@ class TestAirDataClass(unittest.TestCase):
                          "Locations not extracted correctly")
 
     def test_overriden_function_from_inheritance(self):
+        """Tests for inheritance between parent and child class"""
         parent_class_function = CSVFileData.get_data
         child_class_function = AirData.get_data
         self.assertIsNot(parent_class_function, child_class_function,
