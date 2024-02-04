@@ -69,3 +69,18 @@ def population_sd(data):
     variance = s_xx / len(data)
     sd = variance**(1/2)
     return sd
+
+def separate_data(data):
+    """
+    Separates the readings but keeps timeline data for each reading
+    while also filtering invalid data
+    """
+    data1 = []
+    data2 = []
+    for _, row in enumerate(data):
+        if isinstance(row[2], float):
+            data1.append(row[0:3])
+        if isinstance(row[3], float):
+            data2.append([row[i] for i in (0, 1, 3)])
+
+    return data1, data2
