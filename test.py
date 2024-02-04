@@ -173,6 +173,7 @@ class TestAirDataClass(unittest.TestCase):
 
 class TestSeparateDataFunction(unittest.TestCase):
     def test_function_with_sample_data(self):
+        """Tests function with a set of sample data"""
         input_data = [['0', '0', 1.0, 2.0],
                       ['0', '1', 3.0, 4.0],
                       ['0', '2', 5.0, 6.0],
@@ -196,6 +197,7 @@ class TestSeparateDataFunction(unittest.TestCase):
         self.assertEqual(expected_results, actual_results)
 
     def test_function_with_invalid_data(self):
+        """Tests the function where no readings are valid"""
         input_data = [['0', '0', '   ', '   '],
                       ['0', '1', '   ', '   '],
                       ['0', '2', '   ', '   '],
