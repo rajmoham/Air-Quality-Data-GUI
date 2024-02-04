@@ -212,3 +212,24 @@ class TestThreePointWindowFunction(unittest.TestCase):
         actual_results = get_three_point_window_data(input_data, 3)
         expected_results = [12, 14, 16]
         self.assertEqual(actual_results, expected_results)
+
+class TestHighestThreePointSDFunction(unittest.TestCase):
+    BRISTOL_FILE_LOC = "./data/air_quality_data.csv"
+    bristol_data = AirData(BRISTOL_FILE_LOC)
+
+    def test_function_with_sample_data(self):
+        input_data = [['0', '0', 1.2],
+                      ['0', '1', 3.4],
+                      ['1', '0', 34.5],
+                      ['1', '1', 2.3]]
+        actual_results = highest_three_point_sd(input_data)
+        expected_results = [['0', '0', 1.2],
+                            ['0', '1', 3.4],
+                            ['1', '0', 34.5]]
+        self.assertEqual(actual_results, expected_results)
+        
+    def test_function_with_not_enough_data(self):
+        input_data = []
+        actual_results = highest_three_point_sd(input_data)
+        expected_results = None
+        self.assertEqual(actual_results, expected_results)
