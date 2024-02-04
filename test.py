@@ -205,3 +205,10 @@ class TestSeparateDataFunction(unittest.TestCase):
         expected_results = ([],[])
         actual_results = separate_data(input_data)
         self.assertEqual(expected_results, actual_results)
+
+class TestThreePointWindowFunction(unittest.TestCase):
+    def test_data_with_sample_data(self):
+        input_data = [[3*x + 2*y for x in range(3)] for y in range(10)]
+        actual_results = get_three_point_window_data(input_data, 3)
+        expected_results = [12, 14, 16]
+        self.assertEqual(actual_results, expected_results)
