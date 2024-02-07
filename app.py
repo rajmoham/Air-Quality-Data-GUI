@@ -11,13 +11,16 @@ class Main:
         """
         BRISTOL_FILE = "./data/air_quality_data.csv"
         try:
-            air_data_obj = CSVFileData(BRISTOL_FILE)
-
-            self.render_window()
+            self.air_data_obj = CSVFileData(BRISTOL_FILE)
         except FileNotFoundError:
             print(f"The file at location '{BRISTOL_FILE}' cannot be found.")
         except Exception:
             print(f"Input file is not a csv file.")
+
+        self.start_application()
+
+    def start_application(self):
+        self.render_window()
 
     def render_window(self):
         """Instantiates the main GUI window"""
