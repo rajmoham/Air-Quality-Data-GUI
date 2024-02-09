@@ -1,6 +1,7 @@
 from csv_file_data import CSVFileData
 from air_data import AirData
 from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 
 
@@ -49,7 +50,21 @@ class Main:
         loc2_data = [self.timescale, self.readings[1]]
 
         x1, y1 = self.filter_graph_data(loc1_data)
-        x1, y1 = self.filter_graph_data(loc1_data)
+        x2, y2 = self.filter_graph_data(loc2_data)
+
+        graph.plot(x2, y2, label=self.locations[1])
+        graph.plot(x1, y1, label=self.locations[0])
+
+        # Adjust visual configs for graph
+        graph.set_xticks([x1[i] for i in range(0, len(x1), 
+                                               round(len(x1) / 8))])
+        graph.legend(loc="upper center")
+        graph.set_ylabel("Air Quality (ppb)")
+        graph.set_xlabel("Time")
+
+        canvas = FigureCanvasTkAgg(fig)
+        canvas.draw()
+        canvas.get_tk_widget().pack()
 
     def filter_graph_data(self, reading_data):
         """Disregards the row if it contains an non-float value"""
