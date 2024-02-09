@@ -11,8 +11,10 @@ class Main:
         """
         BRISTOL_FILE = "./data/air_quality_data.csv"
         try:
-            air_data_obj = CSVFileData(BRISTOL_FILE)
+            air_data_obj = AirData(BRISTOL_FILE)
 
+            self.timescale = air_data_obj.get_timescale()
+            
             self.render_window()
         except FileNotFoundError:
             print(f"The file at location '{BRISTOL_FILE}' cannot be found.")
