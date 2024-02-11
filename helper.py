@@ -85,7 +85,7 @@ def separate_data(data):
 
     return data1, data2
 
-def get_three_point_window_data(data, start_row):
+def get_three_point_window_data(data, start_row=0):
     """Returns only the readings in a three-point window"""
     readings = [data[start_row][2], 
                 data[start_row + 1][2],
