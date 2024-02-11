@@ -80,3 +80,13 @@ class AirData(CSVFileData):
             return data_field
         
         return float(data_field)
+
+    def get_timescale(self):
+        """Returns the timestamps for the readings."""
+        data = self.get_data()
+        timescale = []
+
+        for row in data:
+            timescale.append(row[1])
+
+        return timescale
