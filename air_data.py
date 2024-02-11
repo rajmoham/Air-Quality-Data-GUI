@@ -44,15 +44,23 @@ class AirData(CSVFileData):
         Overrides the function from the parent class
         Extracts and Returns the data fr the air quality dat
         """
-        return self._file_data[9:]
+
+        # Creates deep copy of the file data
+        data = [x[:] for x in self._file_data][9:]
+
+        for i,row in enumerate(data):
+            data[i][2] = self.cast_to_num(row[2])
+            data[i][3] = self.cast_to_num(row[3])
+
+        return data
     
     def _extract_readings(self):
         """Extracts and parses the raw data readings from the file"""
         reading1 = []
         reading2 = []
         for row in self.get_data():
-            reading1.append(self.parse_data(row[2]))
-            reading2.append(self.parse_data(row[3]))
+            reading1.append((row[2]))
+            reading2.append((row[3]))
 
         self._readings = [reading1, reading2]
 
@@ -75,3 +83,10 @@ class AirData(CSVFileData):
             timescale.append(row[1])
 
         return timescale
+    
+    def cast_to_num(self,data_field):
+        """Converts the given data field into float if it is not empty"""
+        if data_field.isspace():
+            return data_field
+        
+        return float(data_field)

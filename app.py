@@ -5,6 +5,8 @@ from air_data import AirData
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
+from tkinter import ttk
+from helper import *
 
 
 class Main:
@@ -22,10 +24,28 @@ class Main:
             self.readings = self.air_data_obj.get_readings()
             self.locations = self.air_data_obj.get_location_names()
 
+            data = self.air_data_obj.get_data()
+            data = separate_data(data)
+            three_window_data1 = highest_three_point_sd(data[0])
+            three_window_data2 = highest_three_point_sd(data[1])
+
+            sd_data1 = population_sd(
+                get_three_point_window_data(three_window_data1))
+            sd_data2 = population_sd(
+                get_three_point_window_data(three_window_data2))
+
+            self.header = ['Date', 'Time']
+
+            if sd_data1 > sd_data2:
+                self.header.append(self.locations[0])
+                self.three_window_data = three_window_data1
+            else:
+                self.header.append(self.locations[1])
+                self.three_window_data = three_window_data2
         except FileNotFoundError:
             print(f"The file at location '{BRISTOL_FILE}' cannot be found.")
         except Exception:
-            print(f"Input file is not a csv file.")
+            print(f"Something went wrong.")
 
         self.start_application()
 
@@ -60,6 +80,9 @@ class Main:
             font=('Helvetica bold', 16),
             pady=8)
         avg_diff_label.pack()
+
+        self.display_as_table(self.header,
+                            self.three_window_data, self.root)
 
         self.root.mainloop()
 
@@ -103,6 +126,33 @@ class Main:
 
         return [filtered_times, filtered_readings]
 
+    def display_as_table(self, headers, entries, window):
+        """Displays data in a table format using Treeview (tkinker)"""
+
+        if entries is None:
+            return
+
+        # Constants used for table styling
+        COL_WIDTH = 175
+        ANCHOR_POS = 'center'
+        ROW_HEIGHT = 25
+
+        # Styling for table
+        table = ttk.Treeview(window, columns=headers, show='headings')
+        table.heading(headers[0], text=headers[0])
+        table.heading(headers[1], text=headers[1])
+        table.heading(headers[2], text=headers[2])
+        table.column(headers[0], width=COL_WIDTH, anchor=ANCHOR_POS)
+        table.column(headers[1], width=COL_WIDTH, anchor=ANCHOR_POS)
+        table.column(headers[2], width=COL_WIDTH, anchor=ANCHOR_POS)
+        ttk.Style().configure('Treeview', rowheight=ROW_HEIGHT)
+        ttk.Style().configure('Treeview.Heading', font=('Helvetica bold', 14))
+        
+        table['height'] = len(entries)
+
+        for row in entries:
+            table.insert('', index='end', values=row)
+        table.pack()
 
 if __name__ == "__main__":
     main = Main()
