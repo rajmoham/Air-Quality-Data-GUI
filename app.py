@@ -45,7 +45,7 @@ class Main:
         """Instantiates the main GUI window"""
         self.root = tk.Tk()
         self.root.title("Python GUI")
-        self.root.geometry("300x300")
+        self.root.geometry("800x600")
 
         
         title_label = tk.Label(text = self.title,
@@ -53,13 +53,13 @@ class Main:
                                pady=20)
         title_label.pack()
         
+        self.plot_graph()
+
         avg_diff_label = tk.Label(
             text=f"Mean AQI Difference: {self.avg_aqi_diff}",
             font=('Helvetica bold', 16),
             pady=8)
         avg_diff_label.pack()
-
-        self.plot_graph()
 
         self.root.mainloop()
 
