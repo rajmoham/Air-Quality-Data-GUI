@@ -18,9 +18,9 @@ class Main:
         try:
             self.air_data_obj = AirData(BRISTOL_FILE)
 
-            self.timescale = air_data_obj.get_timescale()
-            self.readings = air_data_obj.get_readings()
-            self.locations = air_data_obj.get_location_names()
+            self.timescale = self.air_data_obj.get_timescale()
+            self.readings = self.air_data_obj.get_readings()
+            self.locations = self.air_data_obj.get_location_names()
 
         except FileNotFoundError:
             print(f"The file at location '{BRISTOL_FILE}' cannot be found.")
