@@ -4,6 +4,14 @@ from csv_file_data import CSVFileData
 class AirData(CSVFileData):
     """A subclass of CSVFileData for handling and extracting air quality
     data from a CSV file.
+
+    Methods:
+        get_title(): returns the title
+        get_location_names(): return location names
+        get_data(): return the data with timeline and readings
+        get_readings(): return readings
+        get_timescale(): return the timestamps
+        cast_to_num(data_field): data converted into float if possible
     """
 
     def get_title(self):
@@ -49,14 +57,6 @@ class AirData(CSVFileData):
             timescale.append(row[1])
 
         return timescale
-
-    def parse_data(self, data_field):
-        """Convert the given data field into float if it is not empty."""
-
-        if data_field.isspace():
-            return data_field
-
-        return float(data_field)
 
     def cast_to_num(self, data_field):
         """Convert the given data field into float if it is not empty."""
