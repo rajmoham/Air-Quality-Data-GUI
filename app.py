@@ -69,8 +69,8 @@ class Main:
     def render_window(self):
         """Instantiates the main GUI window"""
         self.root = tk.Tk()
-        self.root.title("Python GUI")
-        self.root.geometry("1000x800")
+        self.root.title(f"{self.title} - GUI")
+        self.root.geometry("700x750")
 
         title_label = tk.Label(text = self.title,
                                font=('Helvetica bold', 20),
@@ -86,6 +86,11 @@ class Main:
         avg_diff_label.pack()
 
         # Display three-point-window in table format
+        avg_diff_label = tk.Label(
+            text=f"Three-point window with highest standard deviation:",
+            font=('Helvetica', 14),
+            pady=8)
+        avg_diff_label.pack()
         self.display_as_table(self.header,
                             self.three_window_data, self.root)
 
