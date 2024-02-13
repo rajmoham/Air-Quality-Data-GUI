@@ -30,7 +30,7 @@ def calculate_difference(data1, data2):
 def average(nums):
     """Calculate the average from a list of numbers."""
 
-    if (len(nums) == 0):
+    if len(nums) == 0:
         return 0
     avg = sum(nums) / len(nums)
     return avg
@@ -87,11 +87,12 @@ def separate_data(data):
 
     return data1, data2
 
+
 def get_three_point_window_data(data, start_row=0):
     """Returns only the readings in a three-point window"""
-    readings = [data[start_row][2], 
-                data[start_row + 1][2],
-                data[start_row + 2][2]]
+    readings = [
+        data[start_row][2], data[start_row + 1][2], data[start_row + 2][2]
+    ]
 
     return readings
 
