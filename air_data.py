@@ -6,11 +6,6 @@ class AirData(CSVFileData):
     data from a CSV file.
     """
 
-    def __init__(self, file):
-        """Initialise the AirData object."""
-
-        super().__init__(file)
-
     def get_title(self):
         """Return the title of the air quality data."""
 
