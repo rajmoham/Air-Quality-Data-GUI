@@ -18,7 +18,7 @@ class CSVFileData:
         if self.file_type(file) != "csv":
             raise Exception("File type is not csv")
 
-        reader = open(file, 'r')
+        reader = open(file, "r")
         for row in reader:
             parsed_data = self._parse_row(row)
             self._file_data.append(parsed_data)
@@ -34,7 +34,7 @@ class CSVFileData:
         """Parses a single row from a string to a list format"""
 
         row_without_endline = row[:-1]
-        split_row = row_without_endline.split(',')
+        split_row = row_without_endline.split(",")
         return split_row
 
     def get_data(self):
