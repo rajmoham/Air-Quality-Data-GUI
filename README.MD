@@ -11,7 +11,7 @@
 
 ## How to run
 ##### Clone the Repository
-`git clone https://mygit.wmg.warwick.ac.uk/u5590481/python-module-assessment.git`
+`git clone https://mygit.wmg.warwick.ac.uk/u5590481/pma.git`
 
 ##### Install virtualenv if you have not already
 `pip install virtualenv`
