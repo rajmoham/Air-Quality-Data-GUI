@@ -1,4 +1,4 @@
-# Programming Module Assessment
+# Air Quality Data GUI - Python
 
 ## Features
 - Reads data from CSV file
@@ -11,7 +11,7 @@
 
 ## How to run
 ##### Clone the Repository
-`git clone https://mygit.wmg.warwick.ac.uk/u5590481/pma.git`
+`git clone https://github.com/rajmoham/PMA.git`
 
 ##### Install virtualenv if you have not already
 `pip install virtualenv`
